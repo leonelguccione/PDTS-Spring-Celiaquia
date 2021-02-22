@@ -1,15 +1,26 @@
 package com.mau.spring.model;
 
+<<<<<<< HEAD
 import lombok.Data;
+=======
+import java.time.ZonedDateTime;
+
+import java.util.Date;
+>>>>>>> 
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+<<<<<<< HEAD
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Date;
+=======
+
+import lombok.Data;
+>>>>>>> 
 
 @Entity
 @Data

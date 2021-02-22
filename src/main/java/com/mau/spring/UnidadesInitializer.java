@@ -2,12 +2,17 @@ package com.mau.spring;
 
 import com.mau.spring.model.UnidadDeMedida;
 import com.mau.spring.repository.UnidadesRepository;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 @Component
+<<<<<<< HEAD
 public class UnidadesInitializer implements ApplicationRunner {
     private final UnidadesRepository unidadesRepository;
 
@@ -17,6 +22,20 @@ public class UnidadesInitializer implements ApplicationRunner {
     }
 
     public void run(ApplicationArguments args){
+=======
+public class UnidadesInitializer implements ApplicationRunner
+{
+    private final UnidadesRepository unidadesRepository;
+
+    @Autowired
+    public UnidadesInitializer(UnidadesRepository unidadesRepository)
+    {
+        this.unidadesRepository = unidadesRepository;
+    }
+
+    public void run(ApplicationArguments args)
+    {
+>>>>>>> 
         unidadesRepository.save(new UnidadDeMedida(0, "Gramo"));
         unidadesRepository.save(new UnidadDeMedida(1, "Litro"));
         unidadesRepository.save(new UnidadDeMedida(2, "Cucharada sopera"));

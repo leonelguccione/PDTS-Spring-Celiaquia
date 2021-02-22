@@ -1,5 +1,9 @@
 package com.mau.spring.model;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 
 public enum FrecuenciaGluten {
     UNA_VEZ_AL_ANIO,
     ALGUNAS_VECES_AL_ANIO,
