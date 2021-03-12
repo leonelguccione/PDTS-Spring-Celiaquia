@@ -1,47 +1,24 @@
 package com.mau.spring.model;
 
-<<<<<<< HEAD
-=======
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
->>>>>>> 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-<<<<<<< HEAD
 import javax.persistence.*;
 import java.util.Set;
 
-=======
->>>>>>> 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-<<<<<<< HEAD
-public class Receta {
-=======
 public class Receta
 {
->>>>>>> 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idReceta;
     private String nombre;
     private String descripcion;
-<<<<<<< HEAD
     @OneToMany(cascade = {CascadeType.ALL})
-=======
-    @OneToMany(cascade = { CascadeType.ALL })
->>>>>>> 
     private Set<Ingrediente> ingredientes;
 
     private Integer cantidadPlatos;

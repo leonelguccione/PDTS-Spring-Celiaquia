@@ -27,39 +27,52 @@ import java.util.Optional;
 import static java.util.Objects.isNull;
 
 @Service
-public class AlimentoService {
+public class AlimentoService
+{
     private final AlimentoRepository alimentoRepository;
 
     @Autowired
-    public AlimentoService(AlimentoRepository alimentoRepository) {
+    public AlimentoService(AlimentoRepository alimentoRepository)
+    {
         this.alimentoRepository = alimentoRepository;
     }
 
-    public void addAlimento(Alimento nuevaAlimento) {
+    public void addAlimento(Alimento nuevaAlimento)
+    {
         alimentoRepository.save(nuevaAlimento);
     }
 
-    public List<Alimento> getAll(String name) {
+    public List<Alimento> getAll(String name)
+    {
         if (isNull(name))
+        {
             return alimentoRepository.findAll();
+        }
         else
+        {
             return alimentoRepository.findByNombre(name);
+        }
     }
 
-    public void setAccesible(AccesibleDTO accesibleDTO) throws AlimentoNotFoundException {
+    public void setAccesible(AccesibleDTO accesibleDTO) throws AlimentoNotFoundException
+    {
         Optional<Alimento> optionalAlimento = alimentoRepository.findById(accesibleDTO.getNumero());
-        if (optionalAlimento.isPresent()) {
+        if (optionalAlimento.isPresent())
+        {
             Alimento alimentoAModificar = optionalAlimento.get();
 
             alimentoAModificar.setEsAccesible(accesibleDTO.isEsAccesible());
             alimentoRepository.save(alimentoAModificar);
-        } else {
+        }
+        else
+        {
             throw new AlimentoNotFoundException();
         }
 
     }
 
-    public void cargarTablas() {
+    public void cargarTablas()
+    {
         cargarTabla("Cereales", "http://www.argenfoods.unlu.edu.ar/Tablas/Grupo/Cereales.xls");
         cargarTabla("Vegetales", "http://www.argenfoods.unlu.edu.ar/Tablas/Grupo/Vegetales.xls");
         cargarTabla("Frutas", "http://www.argenfoods.unlu.edu.ar/Tablas/Grupo/Frutas.xls");
@@ -75,8 +88,10 @@ public class AlimentoService {
 
     }
 
-    private void cargarTabla(String clasificacion, String Url) {
-        try {
+    private void cargarTabla(String clasificacion, String Url)
+    {
+        try
+        {
             InputStream in = new URL(Url).openStream();
             Path tmpPath = Paths.get(clasificacion + ".xls");
             Files.copy(in, tmpPath, StandardCopyOption.REPLACE_EXISTING);
@@ -91,7 +106,8 @@ public class AlimentoService {
 
             HashMap<String, Object> valores = new HashMap<>();
 
-            for (; i < sheet.getPhysicalNumberOfRows(); i++) { //cargar los N alimentos
+            for (; i < sheet.getPhysicalNumberOfRows(); i++)
+            { //cargar los N alimentos
                 HSSFRow filaActual = sheet.getRow(i);
 
                 if (filaActual.getCell(campos.get("nº")) != null && filaActual.getCell(campos.get("nº")).getCellType() == CellType.NUMERIC) //si existe la fila
@@ -101,16 +117,20 @@ public class AlimentoService {
                         HSSFCell celda = filaActual.getCell(columnaCampo);
                         CellType tipoCampo = celda.getCellType();
                         Object valor;
-                        switch (tipoCampo) {
-                            case NUMERIC: {
+                        switch (tipoCampo)
+                        {
+                            case NUMERIC:
+                            {
                                 valor = celda.getNumericCellValue();
                                 break;
                             }
-                            case STRING: {
+                            case STRING:
+                            {
                                 valor = celda.getStringCellValue();
                                 break;
                             }
-                            default: {
+                            default:
+                            {
                                 valor = null;
                             }
                         }
@@ -154,20 +174,25 @@ public class AlimentoService {
 
             }
 
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
 
-    private HashMap<String, Integer> getCamposPresentes(HSSFWorkbook wb) {
+    private HashMap<String, Integer> getCamposPresentes(HSSFWorkbook wb)
+    {
         HSSFSheet sheet = wb.getSheetAt(0);
 
         FormulaEvaluator formulaEvaluator = wb.getCreationHelper().createFormulaEvaluator();
-        HashMap<String,Integer> camposPresentes = new HashMap<>();
+        HashMap<String, Integer> camposPresentes = new HashMap<>();
         //sector leer la fila 5 para saber que columnas son las que hay
         HSSFRow fila5 = sheet.getRow(4);
-        for (Cell cell : fila5) {
-            if (formulaEvaluator.evaluateInCell(cell).getCellType() == CellType.STRING) {
+        for (Cell cell : fila5)
+        {
+            if (formulaEvaluator.evaluateInCell(cell).getCellType() == CellType.STRING)
+            {
                 String nombreCampo = cell.getStringCellValue();
                 String nombreCampoParseado = nombreCampo.trim().toLowerCase().replace(" ", "_").replace("á", "a").replace("é", "e").replace("í", "i").replace("ó", "o").replace("ú", "u");
                 camposPresentes.put(nombreCampoParseado, cell.getColumnIndex());
@@ -176,30 +201,43 @@ public class AlimentoService {
         return camposPresentes;
     }
 
-    private Double checkDouble(HashMap<String, Object> valores, String nutriente) {
+    private Double checkDouble(HashMap<String, Object> valores, String nutriente)
+    {
         Object valor = valores.get(nutriente);
         Double valorDouble;
-        try {
+        try
+        {
             valorDouble = Double.parseDouble(valor.toString());
-        } catch (NullPointerException | NumberFormatException e) {
+        }
+        catch (NullPointerException | NumberFormatException e)
+        {
             valorDouble = 0.0;
         }
 
         return valorDouble;
     }
 
-    private String checkString(HashMap<String, Object> valores, String campo) {
+    private String checkString(HashMap<String, Object> valores, String campo)
+    {
         Object valor = valores.get(campo);
         if (valor == null)
+        {
             return "";
+        }
         return (String) valor;
     }
 
-    public Alimento get(Integer alimentoId) throws AlimentoNotFoundException {
+    public Alimento get(Integer alimentoId) throws AlimentoNotFoundException
+    {
 
         Optional<Alimento> alimento = alimentoRepository.findById(alimentoId);
         if (alimento.isPresent())
+        {
             return alimento.get();
-        else throw new AlimentoNotFoundException();
+        }
+        else
+        {
+            throw new AlimentoNotFoundException();
+        }
     }
 }

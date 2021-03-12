@@ -14,7 +14,8 @@ import javax.persistence.InheritanceType;
 @NoArgsConstructor
 @Getter
 @Entity //entidad de persistencia
-public class Alimento {
+public class Alimento
+{
     @Id
     private Integer numero;
     private String nombre;
@@ -45,7 +46,8 @@ public class Alimento {
 
     private Boolean esAccesible = null;
 
-    public void setEsAccesible(Boolean esAccesible) {
+    public void setEsAccesible(Boolean esAccesible)
+    {
         this.esAccesible = esAccesible;
     }
 }

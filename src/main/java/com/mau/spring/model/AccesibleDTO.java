@@ -6,20 +6,8 @@ import lombok.Data;
 //TODO revisar nombre
 @Data
 @AllArgsConstructor
-
 public class AccesibleDTO
 {
     private int numero;
-    private boolean accesible;
-
-    public int getNumero()
-    {
-        return (this.numero);
-    }
-
-    public boolean getAccesible()
-    {
-        return this.accesible;
-    }
-
+    private boolean esAccesible;
 }
