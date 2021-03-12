@@ -5,3 +5,5 @@ https://petstore.swagger.io/?url=https://raw.githubusercontent.com/maualima/PDTS
 
 
 Nota: Actualmente el proyecto utiliza la base de datos embebida H2 por lo que no es necesario iniciar ningun servidor de DB. La misma es accesible en localhost:8080/h2-console con la JDBC URL: jdbc:h2:mem:test
+
+Nota 2: se visualiza mejor usando: http://localhost:8080/swagger-ui.html O estoy entendiendo mal algo.
