@@ -6,12 +6,7 @@ import lombok.Data;
 //TODO revisar nombre
 @Data
 @AllArgsConstructor
-<<<<<<< HEAD
-public class AccesibleDTO {
-    private int numero
-            ;
-    private boolean esAccesible;
-=======
+
 public class AccesibleDTO
 {
     private int numero;
@@ -26,5 +21,5 @@ public class AccesibleDTO
     {
         return this.accesible;
     }
->>>>>>> 
+
 }
